@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HOW MANY ?</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -42,7 +41,8 @@
             <span class="spanresult" id="player1result">${player1}</span>
             <span class="text-center" style="font-size: 50px; padding: 20px;">-</span>
             <span class="spanresult" id="player2result">${player2}</span>
-            <button v-on:click="reversebutton" id="reverse" class="dn">UN PETIT REVERSE ?</button>
+            <button v-on:click="reversebutton" id="reverse" class="dn reverse">UN PETIT REVERSE ?</button>
+            <button v-on:click="reset" id="reset" class="reverse">Reset</button>
         </div>
     </div>
 </div>
@@ -61,8 +61,8 @@
         data : {
             message: 'Pour Combien ?',
             howmany: null,
-            player1: 1,
-            player2: 1,
+            player1: null,
+            player2: null,
             reverseInt: true,
         },
         methods: {
@@ -115,6 +115,19 @@
                     $('#reverse').addClass('dn');
                 });
 
+            },
+            reset: function () {
+                this.howmany = null;
+                this.player1 = 1;
+                this.player2 = 1;
+                this.reverseInt = true;
+                $('.result').removeClass('fadeInLeft').addClass('fadeOutRight').one('animationend', function () {
+                    $(this).addClass('dn').removeClass('fadeOutRight');
+                    $('.howmany').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
+                        $(this).removeClass('fadeInLeft');
+                    }).children().removeClass('dn');
+                    $('#reverse').addClass('dn');
+                });
             }
         },
     });
