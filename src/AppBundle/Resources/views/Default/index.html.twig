@@ -6,43 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HOW MANY ?</title>
-    <style>
-        .dn {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="app">
-    <h1>${message} <span v-if="howmany">${howmany}</span></h1>
-    <div id="input">
-
-        <div class="howmany animated">
-            <label for="howmany">Entre 2 et 10</label>
-            <input type="number" min="2" max="10" id="howmany" v-model="howmany">
-            <button v-on:click="howmanybutton">Valider</button>
+    <div id="title" class="d-flex flex-row">
+        <h1 class="col-lg-12 text-center" style="padding-top: 10px;">${message}
+            <br/><span v-if="howmany">Sur ${howmany}</span>
+        </h1>
+    </div>
+    <div id="input" class="d-flex flex-row align-items-center justify-content-center">
+        <div class="howmany animated numpad">
+            <div v-on:click="howmanybutton(2)" class="button">2</div>
+            <div v-on:click="howmanybutton(3)" class="button">3</div>
+            <div v-on:click="howmanybutton(4)" class="button">4</div>
+            <div v-on:click="howmanybutton(5)" class="button">5</div>
+            <div v-on:click="howmanybutton(6)" class="button">6</div>
+            <div v-on:click="howmanybutton(7)" class="button">7</div>
+            <div v-on:click="howmanybutton(8)" class="button">8</div>
+            <div v-on:click="howmanybutton(9)" class="button">9</div>
+            <div v-on:click="howmanybutton(10)" class="button">10</div>
         </div>
-        <div class="player1 animated dn">
-            <label for="player1">Joueur 1</label>
-            <input type="number" name="player1" id="player1" min="1" :max="howmany" v-model="player1">
-            <button v-on:click="player1button">Valider</button>
-
+        <div class="player1 animated dn numpad">
+            <div v-for="n in howmany" v-on:click="player1button(n)" class="button dn">${n}</div>
         </div>
-        <div class="player2 animated dn">
-            <label for="player2">Joueur 2</label>
-            <input type="number" name="player2" id="player2" min="1" :max="howmany" v-model="player2">
-            <button v-on:click="player2button">Valider</button>
+        <div class="player2 animated dn numpad">
+            <div v-for="n in howmany" v-on:click="player2button(n)" class="button dn">${n}</div>
         </div>
-        <div class="result animated dn">
-            <div id="player1result">Joueur 1 - ${player1}</div>
-            <div id="player2result">Joueur 2 - ${player2}</div>
+        <div class="result animated dn col-lg-12 text-center">
+            <span class="spanresult" id="player1result">${player1}</span>
+            <span class="text-center" style="font-size: 50px; padding: 20px;">-</span>
+            <span class="spanresult" id="player2result">${player2}</span>
             <button v-on:click="reversebutton" id="reverse" class="dn">UN PETIT REVERSE ?</button>
         </div>
     </div>
 </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+{#<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>#}
 <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -53,36 +58,39 @@
         delimiters: ['${', '}'],
         data : {
             message: 'Pour Combien ?',
-            howmany: 2,
+            howmany: null,
             player1: 1,
             player2: 1,
             reverseInt: true,
         },
         methods: {
-            howmanybutton: function () {
+            howmanybutton: function (howmany) {
+                this.howmany = howmany;
                 $('.howmany').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight');
                     $('.player1').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
-                    });
-                });
+                    }).children().removeClass('dn');
+                }).children().addClass('dn');
             },
-            player1button: function () {
+            player1button: function (player1) {
+                this.player1 = player1;
                 $('.player1').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight');
                     $('.player2').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
-                    });
-                });
+                    }).children().removeClass('dn');
+                }).children().addClass('dn');
 
             },
-            player2button: function () {
+            player2button: function (player2) {
+                this.player2 = player2;
                 $('.player2').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight');
                     $('.result').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
                     });
-                });
+                }).children().addClass('dn');
                 if ((this.player1 != this.player2) && this.reverseInt) {
                     $('#reverse').removeClass('dn');
                     this.reverseInt = false;
@@ -96,14 +104,15 @@
                 }
                 this.player1 = 1;
                 this.player2 = 1;
-                
+
                 $('.result').removeClass('fadeInLeft').addClass('fadeOutRight').one('animationend', function () {
-                   $(this).addClass('dn').removeClass('fadeOutRight');
+                    $(this).addClass('dn').removeClass('fadeOutRight');
+                    $('.player1').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
+                        $(this).removeClass('fadeInLeft');
+                    }).children().removeClass('dn');
+                    $('#reverse').addClass('dn');
                 });
-                $('.player1').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
-                    $(this).removeClass('fadeInLeft');
-                });
-                $('#reverse').addClass('dn');
+
             }
         },
     });
