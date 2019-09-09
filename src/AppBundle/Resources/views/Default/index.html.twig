@@ -69,30 +69,30 @@
             howmanybutton: function (howmany) {
                 this.howmany = howmany;
                 $('.howmany').addClass('fadeOutRight').one('animationend', function () {
-                    $(this).addClass('dn').removeClass('fadeOutRight');
+                    $(this).addClass('dn').removeClass('fadeOutRight').children().addClass('dn');
                     $('.player1').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
                     }).children().removeClass('dn');
-                }).children().addClass('dn');
+                });
             },
             player1button: function (player1) {
                 this.player1 = player1;
                 $('.player1').addClass('fadeOutRight').one('animationend', function () {
-                    $(this).addClass('dn').removeClass('fadeOutRight');
+                    $(this).addClass('dn').removeClass('fadeOutRight').children().addClass('dn');
                     $('.player2').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
                     }).children().removeClass('dn');
-                }).children().addClass('dn');
+                });
 
             },
             player2button: function (player2) {
                 this.player2 = player2;
                 $('.player2').addClass('fadeOutRight').one('animationend', function () {
-                    $(this).addClass('dn').removeClass('fadeOutRight');
+                    $(this).addClass('dn').removeClass('fadeOutRight').children().addClass('dn');
                     $('.result').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
                     });
-                }).children().addClass('dn');
+                });
                 if ((this.player1 != this.player2) && this.reverseInt) {
                     $('#reverse').removeClass('dn');
                     this.reverseInt = false;
@@ -117,17 +117,20 @@
 
             },
             reset: function () {
-                this.howmany = null;
-                this.player1 = 1;
-                this.player2 = 1;
-                this.reverseInt = true;
+                var vue = this;
                 $('.result').removeClass('fadeInLeft').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight');
+                    vue.howmany = null;
+                    vue.player1 = 1;
+                    vue.player2 = 1;
+                    vue.reverseInt = true;
                     $('.howmany').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
                     }).children().removeClass('dn');
                     $('#reverse').addClass('dn');
                 });
+
+
             }
         },
     });
