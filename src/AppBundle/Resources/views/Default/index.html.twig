@@ -68,6 +68,7 @@
         methods: {
             howmanybutton: function (howmany) {
                 this.howmany = howmany;
+                this.message = 'Joueur 1';
                 $('.howmany').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight').children().addClass('dn');
                     $('.player1').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
@@ -77,6 +78,7 @@
             },
             player1button: function (player1) {
                 this.player1 = player1;
+                this.message = 'Joueur 2';
                 $('.player1').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight').children().addClass('dn');
                     $('.player2').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
@@ -87,6 +89,7 @@
             },
             player2button: function (player2) {
                 this.player2 = player2;
+                this.message = "Résultats"
                 $('.player2').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight').children().addClass('dn');
                     $('.result').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
@@ -106,6 +109,7 @@
                 }
                 this.player1 = 1;
                 this.player2 = 1;
+                this.message = 'Joueur 1';
 
                 $('.result').removeClass('fadeInLeft').addClass('fadeOutRight').one('animationend', function () {
                     $(this).addClass('dn').removeClass('fadeOutRight');
@@ -124,6 +128,7 @@
                     vue.player1 = 1;
                     vue.player2 = 1;
                     vue.reverseInt = true;
+                    vue.message = 'Pour Combien ?';
                     $('.howmany').removeClass('dn').addClass('fadeInLeft').one('animationend', function () {
                         $(this).removeClass('fadeInLeft');
                     }).children().removeClass('dn');
