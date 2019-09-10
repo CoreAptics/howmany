@@ -2,6 +2,38 @@ body {
     background-image: linear-gradient(to right bottom, #051937, #0b1f44, #142551, #1e2b5e, #2a306b);
     color: white !important;
 }
+.fixed-bottom {
+    height: 50px;
+    width: 100%;
+}
+
+.gradient1 {
+    height: 30px;
+    width: 30px;
+    background-image: linear-gradient(to right bottom, #051937, #0b1f44, #142551, #1e2b5e, #2a306b);
+}
+
+.gradient2 {
+    height: 30px;
+    width: 30px;
+    background-image: linear-gradient(to right bottom, #b96402, #c37600, #cb8900, #d29c00, #d8af00);
+}
+
+.gradient3 {
+    height: 30px;
+    width: 30px;
+    background-image: linear-gradient(to left top, #933fb0, #7b3ea8, #643b9e, #4d3893, #353487);
+}
+
+.gradient4 {
+    height: 30px;
+    width: 30px;
+    background-image: linear-gradient(to left top, #367a44, #2f7e55, #2b8164, #2c8472, #34877e);
+}
+.rounded-circle {
+    display: inline-block;
+    border: none;
+}
 .dn {
     display: none !important;
 }

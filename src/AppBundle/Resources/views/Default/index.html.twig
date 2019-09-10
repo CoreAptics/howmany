@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <script src="{{ asset('assets/js/bootstrap.min.js') }}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="animated">
 <div id="app">
     <div id="title" class="d-flex flex-row">
         <h1 class="col-lg-12 text-center" style="padding-top: 10px;">${message}
@@ -53,6 +53,12 @@
             <button v-on:click="reversebutton" id="reverse" class="dn reverse">UN PETIT REVERSE ?</button>
             <button v-on:click="reset" id="reset" class="reverse">Reset</button>
         </div>
+    </div>
+    <div class="fixed-bottom text-center">
+        <button class="rounded-circle gradient1" v-on:click="gradient(1)"></button>
+        <button class="rounded-circle gradient2" v-on:click="gradient(2)"></button>
+        <button class="rounded-circle gradient3" v-on:click="gradient(3)"></button>
+        <button class="rounded-circle gradient4" v-on:click="gradient(4)"></button>
     </div>
 </div>
 </body>
@@ -145,6 +151,25 @@
                 });
 
 
+            },
+            gradient: function (gradient) {
+                if (gradient == 1){
+                    $('body').css('background-image', 'linear-gradient(to right bottom, #051937, #0b1f44, #142551, #1e2b5e, #2a306b)').addClass('fadeIn').one('animationend', function () {
+                        $(this).removeClass('fadeIn')
+                    });
+                } else if (gradient == 2) {
+                    $('body').css('background-image', 'linear-gradient(to right bottom, #b96402, #c37600, #cb8900, #d29c00, #d8af00)').addClass('fadeIn').one('animationend', function () {
+                        $(this).removeClass('fadeIn')
+                    });
+                } else if (gradient == 3) {
+                    $('body').css('background-image', 'linear-gradient(to left top, #933fb0, #7b3ea8, #643b9e, #4d3893, #353487').addClass('fadeIn').one('animationend', function () {
+                        $(this).removeClass('fadeIn')
+                    });
+                } else if (gradient == 4) {
+                    $('body').css('background-image', 'linear-gradient(to left top, #367a44, #2f7e55, #2b8164, #2c8472, #34877e').addClass('fadeIn').one('animationend', function () {
+                        $(this).removeClass('fadeIn')
+                    });
+                }
             }
         },
     });
